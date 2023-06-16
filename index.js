@@ -22,7 +22,7 @@ const swaggerOptions = {
   exposeRoute: true,
 };
 
-fastify.register(swaggerUi, swaggerOptions);
+// fastify.register(swaggerUi, swaggerOptions);
 
 fastify.get('/', (request, reply) => {
   reply.send({ message: 'Hello, World!' });

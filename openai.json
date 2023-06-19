@@ -8,7 +8,11 @@
   "servers": [
     {
       "url": "https://dev-api.bemehealth.com/api/v1",
-      "description": "Production server"
+      "description": "Development server"
+    },
+    {
+      "url": "https://stage-api.bemehealth.com/api/v1",
+      "description": "Staging server"
     }
   ],
   "security": [
@@ -2925,9 +2929,9 @@
   },
   "components": {
     "securitySchemes": {
-      "api-key": {
-        "type": "apiKey",
-        "name": "api-key",
+      "Authorization": {
+        "type": "token",
+        "name": "Authorization",
         "in": "header",
         "description": "API Key authentication.\n\nAuthentication for some endpoints, like write operations on the\nArticles API require a DEV API key.\n\nAll authenticated endpoints are CORS disabled, the API key is intended for non-browser scripts.\n\n### Getting an API key\n\nTo obtain one, please follow these steps:\n\n  - visit https://dev.to/settings/extensions\n  - in the \"DEV API Keys\" section create a new key by adding a\n    description and clicking on \"Generate API Key\"\n\n    ![obtain a DEV API Key](https://user-images.githubusercontent.com/37842/172718105-bd93664e-76e0-477d-99c4-265dda0b06c5.png)\n\n  - You'll see the newly generated key in the same view\n    ![generated DEV API Key](https://user-images.githubusercontent.com/37842/172718151-e7fe26a0-9937-42e8-96c6-333acdab9e49.png)"
       }
@@ -2935,25 +2939,25 @@
     "parameters": {
       "pageParam": {
         "in": "query",
-        "name": "page",
+        "name": "limit",
         "required": false,
         "description": "Pagination page",
         "schema": {
           "type": "integer",
           "format": "int32",
           "minimum": 1,
-          "default": 1
+          "default": 25
         }
       },
       "perPageParam30to1000": {
         "in": "query",
-        "name": "per_page",
+        "name": "offset",
         "required": false,
         "description": "Page size (the number of items to return per page). The default maximum value can be overridden by \"API_PER_PAGE_MAX\" environment variable.",
         "schema": {
           "type": "integer",
           "format": "int32",
-          "minimum": 1,
+          "minimum": 0,
           "maximum": 1000,
           "default": 30
         }
